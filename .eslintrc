@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint", 
+  "env":{
+    "browser": true, 
+    "es6" : true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    }
+  },
+  "settings":{"import/resolver":{"node":{"extensions":[".js",".jsx", "es6"]}}},
+  "plugins":["react", "react-native", "import", "jsx-ally"],
+  "extends": ["rallycoding","eslint:recommended","plugin:react/recommended", "airbnb"], 
+  "rules":{
+    "arrow-body-style" : "warn", 
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+  } 
+
+}
