@@ -107,6 +107,10 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    
+    aaptOptions.cruncherEnabled = false
+aaptOptions.useNewCruncher = false
+
     splits {
         abi {
             reset()
