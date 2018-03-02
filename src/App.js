@@ -1,15 +1,13 @@
 import React, {Component} from 'react'; 
 import {View} from 'react-native'; 
 import * as firebase from 'firebase';
-import { Header, Button } from './components/common';
+import { Header, Button, Spinner, Card, CardSection } from './components/common';
 import LoginForm from './components/LoginForm';
 import  { FB_APIKEY, FB_AUTHDOMAIN, FB_DATABASEURL, FB_PROJECTID, FB_STORAGEBUCKET, FB_MESSAGINGSENDERID} from '../config/constants.js';
 
 class App extends Component{
 
-
-  state = {loggedIn :false }; 
-
+state = { loggedIn : null }; 
 componentWillMount(){
   
  var app = firebase.initializeApp({
@@ -22,35 +20,47 @@ componentWillMount(){
   });
 
 
-firebase.auth().onAuthStateChanged((user)=>{
+firebase.auth().onAuthStateChanged((user) => {
 if(user){
-  this.setState({loggedIn:true}); 
+  this.setState({loggedIn: true}); 
   }
   else{
-    this.setState({loggedIn:false}); 
+    this.setState({loggedIn: false}); 
   }
 }); 
 }
+
+
+
 renderContent(){
-  if(this.state.loggedIn){
-    return(
-      <Button>
-        Log Out 
-        </Button>
-    );
-  }
-  return <LoginForm/>
+switch (this.state.loggedIn) {
+  case true:
+  return( 
+  <Card><CardSection>
+    <Button onPress={()=> firebase.auth().signOut()}>
+    Log Out
+</Button></CardSection></Card>
+);
+  case false:
+  return <LoginForm />;
+  default:
+return <Spinner size="small"/>; 
 }
+};
+
+
 
   render(){
     return(
       <View>
         <Header headerText = "Authentication"/>
-        {this.renderContent()}
         
+        {this.renderContent()} 
         </View>
     );
   }
 }
+
+
 
 export default App;

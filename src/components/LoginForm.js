@@ -16,7 +16,7 @@ onButtonPress(){
   .then(this.onLoginSuccess.bind(this))
   .catch(()=>{
     firebase.auth().createUserWithEmailAndPassword(email,password)
-    .then(this.onLoginSuccess.bind(this)) 
+    .then(this.onLoginSuccess.bind(this))
     .catch(this.onLoginFail.bind(this));
   });
 }
@@ -62,6 +62,8 @@ render (){
       <CardSection>
     {this.renderButton()}
         </CardSection>
+
+ 
       </Card>
   );
 }
